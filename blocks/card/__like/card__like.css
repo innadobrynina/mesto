@@ -1,0 +1,11 @@
+.card__like {
+    max-width: 22px;
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+}
+
+.card__like:hover {
+    opacity: .5;
+    cursor: pointer;
+}

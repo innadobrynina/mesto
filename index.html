@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Mesto. Russia</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+</head>
+
+<body>
+    <div class="root">
+        <header class="header">
+            <img src='./images/logo.svg' class="header__logo" alt="Логотип">
+        </header>
+
+        <main class="content">
+            <section class="profile">
+                <div class="profile__avatar-block">
+                    <img src='./images/profile.png' class="profile__avatar" alt="Аватар">
+                </div>
+                <div class="profile__info">
+
+                    <div class="profile__text">
+                        <h1 class="profile__title">Жак-Ив Кусто</h1>
+                        <p class="profile__subtitle">Исследователь океана</p>
+                    </div>
+                    <img src="./images/edit_button.svg" class="profile__edit-button" alt="Карандашик">
+                </div>
+                <img src='./images/plus.png' class="profile__add-button" alt="Плюс в квадрате">
+            </section>
+            <section class="elements">
+                <div class="card">
+                    <img src="./images/Karachaevsk.png" alt="Карачаевск" class="card__image">
+                    <h2 class="card__title">Карачаевск</h2>
+                    <img src="./images/like.png" alt="сердечко" class="card__like card__like_active">
+                </div>
+                <div class="card">
+                    <img src="./images/Elbrus.png" alt="Эльбрус" class="card__image">
+                    <h2 class="card__title">Гора Эльбрус</h2>
+                    <img src="./images/like.png" alt="сердечко" class="card__like card__like_active">
+                </div>
+                <div class="card">
+                    <img src="./images/Dombay.png" alt="Домбай" class="card__image">
+                    <h2 class="card__title">Домбай</h2>
+                    <img src="./images/like.png" alt="сердечко" class="card__like card__like_active">
+                </div>
+                <div class="card">
+                    <img src="./images/Elbrus.png" alt="Эльбрус" class="card__image">
+                    <h2 class="card__title">Гора Эльбрус</h2>
+                    <img src="./images/like.png" alt="сердечко" class="card__like card__like_active">
+                </div>
+                <div class="card">
+                    <img src="./images/Dombay.png" alt="Домбай" class="card__image">
+                    <h2 class="card__title">Домбай</h2>
+                    <img src="./images/like.png" alt="сердечко" class="card__like card__like_active">
+                </div>
+                <div class="card">
+                    <img src="./images/Karachaevsk.png" alt="Карачаево-Черкессия" class="card__image">
+                    <h2 class="card__title">Карачаево-Черкессия</h2>
+                    <img src="./images/like.png" alt="сердечко" class="card__like card__like_active">
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <p class="footer__author">&COPY;&nbsp;2020 Mesto Russia</p>
+        </footer>
+
+
+        <section class="popup">
+            <form class="popup__container">
+                <h3 class="popup__title">Редактировать профиль</h3>
+                <input class="popup__name" type="text" value="Жак-Ив Кусто">
+                <input class="popup__about" type="text" value="Исследователь океана">
+                <button class="popup__button" type="submit">Сохранить</button>
+                <img src="./images/close_icon.png" class="popup__close" alt="кнопка закрытия">
+            </form>
+
+        </section>
+    </div>
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>
