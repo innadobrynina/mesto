@@ -4,14 +4,11 @@
     margin-bottom: 41px;
 }
 
-.header__logo:hover {
-    content: url(../../../images/Vector.svg);
-}
-
 @media screen and (max-width: 767px) {
     .header__logo {
         width: 103.74px;
         height: 24.4px;
         margin-left: 27px;
+        margin-bottom: 31.6px;
     }
 }

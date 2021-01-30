@@ -3,6 +3,10 @@
     position: absolute;
     bottom: 30px;
     right: 20px;
+    outline: none;
+    border: 0;
+    background: transparent;
+    padding: 0;
 }
 
 .card__like:hover {
