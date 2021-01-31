@@ -1,6 +1,6 @@
 .card {
     max-width: 282px;
-    height: 361px;
+    /* height: 361px; */
     margin: 0 17px 20px 0;
     border-radius: 10px;
     background-color: white;
@@ -12,7 +12,12 @@
 
 .card:nth-child(3n) {
     margin-right: 0;
-    margin-bottom: 0;
+}
+
+@media screen and (min-width:1280px) {
+    .card {
+        width: 282px;
+    }
 }
 
 @media screen and (max-width: 1279px) {
@@ -38,5 +43,8 @@
     }
     .card:nth-child(1n) {
         margin-bottom: 19px;
+    }
+    .card:last-child {
+        margin-bottom: 0;
     }
 }
