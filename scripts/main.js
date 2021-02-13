@@ -131,8 +131,8 @@ function likeTag(evt) {
 
 
 let addFormElement = document.querySelector(".popup-add");
-let addCloseButton = addFormElement.querySelector(".popup__close");
-let loadButton = addFormElement.querySelector(".popup__button");
+let addCloseButton = addFormElement.querySelector(".popup-add__close");
+let loadButton = addFormElement.querySelector(".popup-add__button");
 
 // Функция открытия окна редактирования
 function fAddButton() {
