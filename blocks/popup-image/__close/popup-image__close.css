@@ -1,0 +1,25 @@
+.popup-image__close {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: -49px;
+    top: -49px;
+    outline: none;
+    border: 0;
+    background: transparent;
+    z-index: 100;
+    padding: 0;
+}
+
+.popup-image__close:hover {
+    opacity: .6;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+    .popup-image__close {
+        right: 0;
+        width: 26px;
+        height: 26px;
+    }
+}

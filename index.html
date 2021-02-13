@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./pages/index.css">
     <title>Mesto. Russia</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
 </head>
 
 <body>
@@ -31,7 +32,7 @@
 
             </section>
             <section class="elements">
-                <div class="card">
+                <!-- <div class="card">
                     <img src="./images/Karachaevsk.png" alt="Карачаевск" class="card__image">
                     <div class="card__text">
                         <h2 class="card__title">Карачаевск</h2>
@@ -72,7 +73,7 @@
                         <h2 class="card__title">Карачаево-Черкессия</h2>
                         <button class="card__like" type="button"><img src="./images/like.svg" alt="сердечко"></button>
                     </div>
-                </div>
+                </div> -->
             </section>
         </main>
         <footer class="footer">
@@ -81,17 +82,45 @@
 
 
         <section class="popup">
-            <form class="popup__container" name="popup" id="form">
+            <form class="popup__container" name="popup" id="edit">
                 <h3 class="popup__title">Редактировать профиль</h3>
                 <input class="popup__input popup__input_name" type="text" name="title" value="Жак-Ив Кусто">
                 <input class="popup__input popup__input_about" type="text" name="about" value="Исследователь океана">
                 <button class="popup__button" type="submit">Сохранить</button>
                 <button class="popup__close" type="button"><img src="./images/close_icon.svg" class="popup__close-image" alt="кнопка закрытия"></button>
             </form>
-
         </section>
+
+        <section class="popup-add">
+            <form class="popup-add__container" name="popup-add" id="add">
+                <h3 class="popup__title">Новое Место</h3>
+                <input class="popup-add__input popup-add__input_place" type="text" name="place" value="Название">
+                <input class="popup-add__input popup-add__input_image" type="text" name="link" value="Ссылка на картинку">
+                <button class="popup__button" type="submit">Загрузить</button>
+                <button class="popup__close" type="button"><img src="./images/close_icon.svg" class="popup-image__close_btn" alt="кнопка закрытия"></button>
+            </form>
+        </section>
+
+        <section class="popup-image">
+            <form class="popup-image__container">
+                <button class="popup-image__close" type="button"><img src="./images/close_icon.svg" class="popup-image__close_btn" alt="кнопка закрытия"></button>
+                <img src="#" alt="" class="popup-image__content" id="img01">
+                <div class="popup-image__caption"></div>
+            </form>
+        </section>
+
+        <template class="template">    
+        <div class="card">  
+            <img src="" alt="" class="card__image">
+            <button type="button" class="card__remove"><img src="./images/trash.svg" alt="корзина"></button>
+            <div class="card__text">
+                <h2 class="card__title"></h2>
+                <button class="card__like" type="button" aria-label="Мне нравится"></button>
+            </div>      
+        </div>
+        </template>
+        <script src="scripts/main.js"></script>
     </div>
-    <script src="scripts/main.js"></script>
 </body>
 
 </html>

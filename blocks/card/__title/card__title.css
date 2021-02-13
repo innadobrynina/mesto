@@ -9,3 +9,15 @@
     width: 188px;
     margin: 0;
 }
+
+@media screen and (max-width: 1023px) {
+    .card__title {
+        max-width: 150px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .card__title {
+        max-width: 180px;
+    }
+}

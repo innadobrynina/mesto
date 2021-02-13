@@ -1,11 +1,11 @@
-.popup {
+.popup-image {
+    display: flex;
     position: fixed;
-    background: rgba(0, 0, 0, .5);
     top: 0;
     left: 0;
-    display: flex;
     right: 0;
     bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
     z-index: 100;
     align-items: center;
     justify-content: center;
