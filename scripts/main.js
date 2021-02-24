@@ -9,22 +9,41 @@ const addCardPopup = document.querySelector(".popup-add");
 const cardPopupCloseButton = addCardPopup.querySelector(".popup__close");
 const cardPopuploadButton = addCardPopup.querySelector(".popup__button");
 const addCardPopupButton = document.querySelector(".profile__button-add");
+const popupContainer = document.querySelector(".popup__container");
+const popup = document.querySelector(".popup");
 
 // Функция открытия всплывающих окон
-function openPopup(popup) {
+function openPopup(popup, noLine) {
     popup.classList.add('popup_opened');
+    if (noLine != '') {
+        nameInput.classList.remove("popup__input_type_error");
+        aboutInput.classList.remove("popup__input_type_error");
+    }
 }
 
 // Функция закрытия всплывающих окон
-function closePopup(popup) {
+function closePopup(popup, inputArray, errorArray) {
     popup.classList.remove('popup_opened');
+
+    if (inputArray != null) {
+        inputArray.forEach((el) => {
+            el.value = '';
+        });
+    }
+    if (errorArray != null) {
+        errorArray.forEach((err) => {
+            err.classList.remove("popup__input-error_active");
+        });
+    }
+
 }
 
 // Применяем фукнцию открытия всплывающих окон для открытия всех всплывающих окон
 profilePopupButton.addEventListener("click", () => {
     nameInput.value = profileTitle.textContent;
     aboutInput.value = profileSubtitle.textContent;
-    openPopup(profilePopup)
+    const noLine = '1';
+    openPopup(profilePopup, noLine)
 });
 
 addCardPopupButton.addEventListener("click", () => {
@@ -32,13 +51,43 @@ addCardPopupButton.addEventListener("click", () => {
 });
 
 // Применяем фукнцию закрытия всплывающих окон для закрытия всех всплывающих окон
+
+window.onkeydown = function(evt) {
+    if (evt.keyCode === 27) {
+        evt.preventDefault();
+        const arrayPopup = document.querySelectorAll('section.popup');
+        arrayPopup.forEach((elPopup) => {
+            const inputArray = elPopup.querySelectorAll(".popup__input");
+            const errorArray = elPopup.querySelectorAll(".popup__input-error");
+            closePopup(elPopup, inputArray, errorArray);
+        })
+    }
+}
+
+window.addEventListener("click", function clickOverlay(evt) {
+    const arrayPopup = document.querySelectorAll('section.popup');
+    arrayPopup.forEach((elPopup) => {
+        if (evt.target == elPopup) {
+            if (evt.target != popupContainer && evt.target != document.querySelectorAll('.popup__input')) {
+                const inputArray = elPopup.querySelectorAll(".popup__input");
+                const errorArray = elPopup.querySelectorAll(".popup__input-error");
+                closePopup(elPopup, inputArray, errorArray);
+            }
+        }
+    })
+})
+
 profilePopupCloseButton.addEventListener("click", () => {
-    closePopup(profilePopup);
+    const inputArray = profilePopup.querySelectorAll(".popup__input");
+    const errorArray = profilePopup.querySelectorAll(".popup__input-error");
+    closePopup(profilePopup, inputArray, errorArray);
 })
 
 cardPopupCloseButton.addEventListener("click", () => {
-    closePopup(addCardPopup)
-});
+    const inputArray = addCardPopup.querySelectorAll(".popup__input");
+    const errorArray = addCardPopup.querySelectorAll(".popup__input-error");
+    closePopup(addCardPopup, inputArray, errorArray);
+})
 
 // Функция кнопки сохранения
 function formSubmitHandler(evt) {
@@ -111,9 +160,10 @@ function getItem(item) {
     const modalImg = document.getElementById('img01');
     const captionText = document.querySelector('.popup-image__caption');
     imageEl.addEventListener("click", () => {
-        openPopup(imagePopup)
-        modalImg.src = item.link
-        captionText.textContent = item.place
+        openPopup(imagePopup);
+        modalImg.src = item.link;
+        modalImg.alt = item.place;
+        captionText.textContent = item.place;
     });
     return newItem.children[0];
 }
@@ -138,7 +188,6 @@ function likeTag(evt) {
 
 // Добавляем новую карточку по клику кнопки
 function handleAdd(evt) {
-    console.log("handleAdd");
     evt.preventDefault();
     const inputPlaceText = inputPlaceEl.value;
 

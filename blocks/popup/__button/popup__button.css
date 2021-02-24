@@ -18,6 +18,16 @@
     opacity: 0.8;
 }
 
+.popup__button:disabled {
+    color: #000000;
+    background: #E5E5E5;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 @media screen and (max-width: 767px) {
     .popup__button {
         max-width: 238px;

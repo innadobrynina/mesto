@@ -18,3 +18,9 @@
         max-width: 238px;
     }
 }
+
+.popup__input:not(:focus):invalid {
+    border-bottom: 1px solid #ff0000;
+    color: #e53e3e;
+    outline: none;
+}
