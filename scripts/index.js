@@ -1,3 +1,6 @@
+import Card from './card.js';
+import FormValidator from './FormValidator.js';
+
 const profilePopup = document.querySelector(".popup-profile");
 const profilePopupButton = document.querySelector(".profile__button-edit");
 const profilePopupCloseButton = profilePopup.querySelector(".popup__close");
@@ -9,7 +12,6 @@ const addCardPopup = document.querySelector(".popup-add");
 const cardPopupCloseButton = addCardPopup.querySelector(".popup__close");
 const cardPopuploadButton = addCardPopup.querySelector(".popup__button");
 const addCardPopupButton = document.querySelector(".profile__button-add");
-const popupContainer = document.querySelector(".popup__container");
 
 const initialCards = [{
         place: "Архыз",
@@ -85,7 +87,6 @@ profilePopupButton.addEventListener("click", () => {
     aboutInput.value = profileSubtitle.textContent;
     openPopup(profilePopup);
     noLineForProfileForm();
-    formError = profilePopup.querySelector('.popup__input-error');
     clearError(profilePopup);
 });
 
@@ -95,8 +96,7 @@ addCardPopupButton.addEventListener("click", () => {
     buttonElement.setAttribute("disabled", true);
     buttonElement.classList.add('popup__button_inactive');
     openPopup(addCardPopup);
-    formName = document.getElementById('add');
-    formError = addCardPopup.querySelector('.popup__input-error');
+    const formName = document.getElementById('add');
     clearInput(formName);
     clearError(addCardPopup);
 
@@ -139,74 +139,28 @@ profilePopup.addEventListener("submit", submitProfileForm);
 
 // Находим шаблон template
 const listContainerEl = document.querySelector(".elements");
-const templateEl = document.querySelector(".template");
+// const templateEl = document.querySelector(".template");
 const inputPlaceEl = document.querySelector(".popup__input_place");
 const inputImageEl = document.querySelector(".popup__input_image");
 
-// Создаем карточки
-function getItem(item) {
-    const newItem = templateEl.content.querySelector('.card').cloneNode(true);
-    const titleEl = newItem.querySelector(".card__title");
-    const imageEl = newItem.querySelector(".card__image");
-    titleEl.textContent = item.place;
-    imageEl.setAttribute("src", item.link);
-    imageEl.setAttribute("alt", item.place);
-
-    // Создаем кнопку удаления карточки и применяем к ней функцию удаления
-    const removeBtn = newItem.querySelector(".card__remove");
-    removeBtn.addEventListener("click", handleDelete);
-
-    // Создаем кнопку лайка карточки и применяем к ней функцию проставления лайка
-    const likeBtn = newItem.querySelector(".card__like");
-    likeBtn.addEventListener('click', likeTag);
-
-    // создаем функцию закрытия всплывающего изображения по клику на него
-    const imagePopup = document.querySelector('.popup-image');
-    const closeBtnImg = imagePopup.querySelector(".popup__close");
-    closeBtnImg.addEventListener("click", () => {
-        closePopup(imagePopup);
-    });
-
-    // Берем изображение и вставляем его во всплывающее окно
-    const modalImg = document.getElementById('img01');
-    const captionText = document.querySelector('.popup-image__caption');
-    imageEl.addEventListener("click", () => {
-        openPopup(imagePopup);
-        modalImg.src = item.link;
-        modalImg.alt = item.place;
-        captionText.textContent = item.place;
-    });
-    return newItem;
-}
-
 // Добавляем карточки в секцию elements
 function render() {
-    const html = initialCards.map(getItem);
+    const html = initialCards.map((item) => new Card(item).getCard());
     listContainerEl.append(...html);
+    new FormValidator().enableValidation();
 }
-
-// Создаем функцию удаления карточки
-function handleDelete(event) {
-    const targetEl = event.target;
-    const targetItem = targetEl.closest(".card");
-    targetItem.remove();
-}
-
-// Создаем функцию проставления лайка
-function likeTag(evt) {
-    evt.target.classList.toggle('card__like_active');
-};
 
 // Добавляем новую карточку по клику кнопки
 function handleAdd(evt) {
+    console.log("handleAdd");
     evt.preventDefault();
     const inputPlaceText = inputPlaceEl.value;
 
     const inputImageLink = inputImageEl.value;
-    const listPlaceItem = getItem({
+    const listPlaceItem = new Card({
         place: inputPlaceText,
         link: inputImageLink,
-    });
+    }).getCard();
 
     listContainerEl.prepend(listPlaceItem);
     inputPlaceEl.value = '';
@@ -215,8 +169,5 @@ function handleAdd(evt) {
 }
 
 cardPopuploadButton.addEventListener("click", handleAdd);
-
-// Сохранение результата работы функции
-addCardPopup.addEventListener("submit", handleAdd);
 
 render();
