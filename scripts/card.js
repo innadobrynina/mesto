@@ -70,7 +70,7 @@ export default class Card {
         const imagePopup = document.querySelector('.popup-image');
         const closeBtnImg = imagePopup.querySelector(".popup__close");
         closeBtnImg.addEventListener("click", () => {
-            closePopup(imagePopup);
+            this._closePopup(imagePopup);
         });
 
         // Берем изображение и вставляем его во всплывающее окно
