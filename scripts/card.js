@@ -18,7 +18,7 @@ export default class Card {
     // Функция открытия всплывающих окон
     _openPopup(popup) {
         popup.classList.add('popup_opened');
-        document.addEventListener('keydown', this._closeByEsc);
+        document.addEventListener('keydown', this._closeByEsc.bind(this));
     }
 
     // Функция закрытия всплывающих окон по кнопке Escape
@@ -32,14 +32,19 @@ export default class Card {
 
     // Функция отмены подчеркивания 
     _noLineForProfileForm() {
+        const nameInput = edit.elements.title;
+        const aboutInput = edit.elements.about;
         nameInput.classList.remove("popup__input_type_error");
         aboutInput.classList.remove("popup__input_type_error");
     }
 
     // Функция закрытия всплывающих окон
     _closePopup(popup) {
+        if (popup === null) {
+            return
+        }
         popup.classList.remove('popup_opened');
-        document.removeEventListener('keydown', this._closeByEsc);
+        document.removeEventListener('keydown', this._closeByEsc.bind(this));
     }
 
     getCard() {
@@ -55,11 +60,11 @@ export default class Card {
 
         // Создаем кнопку удаления карточки и применяем к ней функцию удаления
         const removeBtn = newItem.querySelector(".card__remove");
-        removeBtn.addEventListener("click", this._handleDelete);
+        removeBtn.addEventListener("click", this._handleDelete.bind(this));
 
         // Создаем кнопку лайка карточки и применяем к ней функцию проставления лайка
         const likeBtn = newItem.querySelector(".card__like");
-        likeBtn.addEventListener('click', this._likeTag);
+        likeBtn.addEventListener('click', this._likeTag.bind(this));
 
         // создаем функцию закрытия всплывающего изображения по клику на него
         const imagePopup = document.querySelector('.popup-image');

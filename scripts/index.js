@@ -68,6 +68,9 @@ function clearError(formError) {
 
 // Функция закрытия всплывающих окон
 function closePopup(popup) {
+    if (popup === null) {
+        return
+    }
     popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', closeByEsc);
 }
