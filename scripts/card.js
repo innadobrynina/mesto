@@ -1,89 +1,59 @@
 export default class Card {
-    constructor(item) {
-        this._item = item;
+    constructor(data, cardSelector, handleCardClick) {
+        this._place = data.place;
+        this._link = data.link;
+        this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
+    }
+    _getTemplate() {
+        // забираем разметку из HTML и клонируем элемент
+        const cardElement = document
+            .querySelector(this._cardSelector)
+            .content
+            .querySelector('.card')
+            .cloneNode(true);
+
+        // вернём DOM-элемент карточки
+        return cardElement;
     }
 
-    // Создаем функцию удаления карточки
-    _handleDelete(event) {
-        const targetEl = event.target;
-        const targetItem = targetEl.closest(".card");
-        targetItem.remove();
+    generateCard() {
+        this._element = this._getTemplate();
+        this._setEventListeners();
+        this._element.querySelector('.card__title').textContent = this._place;
+        this._modalImg.src = this._link;
+        this._modalImg.alt = this._place;
+
+        return this._element;
     }
 
-    // Создаем функцию проставления лайка
-    _likeTag(evt) {
-        evt.target.classList.toggle('card__like_active');
-    };
-
-    // Функция открытия всплывающих окон
-    _openPopup(popup) {
-        popup.classList.add('popup_opened');
-        document.addEventListener('keydown', this._closeByEsc.bind(this));
+    // метод, делающий активным кнопку лайка
+    _handleLikeClick() {
+        this._element.querySelector('.card__like').classList.toggle('card__like_active');
     }
 
-    // Функция закрытия всплывающих окон по кнопке Escape
-    _closeByEsc(evt) {
-        if (evt.keyCode === 27) /* escape */ {
-            const openedPopup = document.querySelector('.popup_opened');
-            this._closePopup(openedPopup);
-            this._noLineForProfileForm();
-        }
+
+    // метод, удаляющий карточку
+    _handleDelete() {
+        this._element.querySelector('.card__remove').closest(".card").remove();
     }
 
-    // Функция отмены подчеркивания 
-    _noLineForProfileForm() {
-        const nameInput = edit.elements.title;
-        const aboutInput = edit.elements.about;
-        nameInput.classList.remove("popup__input_type_error");
-        aboutInput.classList.remove("popup__input_type_error");
+
+    // вызываем слушателей
+    _setEventListeners() {
+        //активируем лайк
+        this._likeBtn = this._element.querySelector(".card__like");
+        this._likeBtn.addEventListener('click', () =>
+            this._handleLikeClick());
+
+        //удаляем карточку
+        this._removeBtn = this._element.querySelector(".card__remove");
+        this._removeBtn.addEventListener('click', () =>
+            this._handleDelete());
+
+        //открываем попап с изображением
+        this._modalImg = this._element.querySelector(".card__image");
+        this._modalImg.addEventListener('click', () =>
+            this._handleCardClick(this._place, this._link));
     }
-
-    // Функция закрытия всплывающих окон
-    _closePopup(popup) {
-        if (popup === null) {
-            return
-        }
-        popup.classList.remove('popup_opened');
-        document.removeEventListener('keydown', this._closeByEsc.bind(this));
-    }
-
-    getCard() {
-        const item = this._item;
-
-        const templateEl = document.querySelector(".template");
-        const newItem = templateEl.content.querySelector('.card').cloneNode(true);
-        const titleEl = newItem.querySelector(".card__title");
-        const imageEl = newItem.querySelector(".card__image");
-        titleEl.textContent = item.place;
-        imageEl.setAttribute("src", item.link);
-        imageEl.setAttribute("alt", item.place);
-
-        // Создаем кнопку удаления карточки и применяем к ней функцию удаления
-        const removeBtn = newItem.querySelector(".card__remove");
-        removeBtn.addEventListener("click", this._handleDelete.bind(this));
-
-        // Создаем кнопку лайка карточки и применяем к ней функцию проставления лайка
-        const likeBtn = newItem.querySelector(".card__like");
-        likeBtn.addEventListener('click', this._likeTag.bind(this));
-
-        // создаем функцию закрытия всплывающего изображения по клику на него
-        const imagePopup = document.querySelector('.popup-image');
-        const closeBtnImg = imagePopup.querySelector(".popup__close");
-        closeBtnImg.addEventListener("click", () => {
-            this._closePopup(imagePopup);
-        });
-
-        // Берем изображение и вставляем его во всплывающее окно
-        const modalImg = document.getElementById('img01');
-        const captionText = document.querySelector('.popup-image__caption');
-        imageEl.addEventListener("click", () => {
-            this._openPopup(imagePopup);
-            modalImg.src = item.link;
-            modalImg.alt = item.place;
-            captionText.textContent = item.place;
-        });
-
-        return newItem;
-    }
-
 }
