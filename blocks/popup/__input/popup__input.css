@@ -19,8 +19,7 @@
     }
 }
 
-.popup__input:not(:focus):invalid {
-    border-bottom: 1px solid #ff0000;
+.popup__input:focus:invalid {
     color: #e53e3e;
     outline: none;
 }
