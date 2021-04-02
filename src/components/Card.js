@@ -1,14 +1,14 @@
 export default class Card {
-    constructor(data, cardSelector, handleCardClick) {
+    constructor(data, handleCardClick, template) {
         this._place = data.place;
         this._link = data.link;
-        this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
+        this._template = template;
     }
     _getTemplate() {
         // забираем разметку из HTML и клонируем элемент
         const cardElement = document
-            .querySelector(this._cardSelector)
+            .querySelector(this._template)
             .content
             .querySelector('.card')
             .cloneNode(true);
@@ -42,18 +42,17 @@ export default class Card {
     // вызываем слушателей
     _setEventListeners() {
         //активируем лайк
-        this._likeBtn = this._element.querySelector(".card__like");
+        this._likeBtn = this._element.querySelector('.card__like');
         this._likeBtn.addEventListener('click', () =>
             this._handleLikeClick());
 
         //удаляем карточку
-        this._removeBtn = this._element.querySelector(".card__remove");
+        this._removeBtn = this._element.querySelector('.card__remove');
         this._removeBtn.addEventListener('click', () =>
             this._handleDelete());
 
         //открываем попап с изображением
-        this._modalImg = this._element.querySelector(".card__image");
-        this._modalImg.addEventListener('click', () =>
-            this._handleCardClick(this._place, this._link));
+        this._modalImg = this._element.querySelector('.card__image');
+        this._modalImg.addEventListener('click', this._handleCardClick);
     }
 }
