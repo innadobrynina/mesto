@@ -1,18 +1,11 @@
 .profile__text {
     display: flex;
-    flex-direction: row;
-    justify-content: start;
-    margin: 22px 0 0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    align-items: center;
+    margin-bottom: 16px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1000px) {
     .profile__text {
-        display: flex;
-        flex-direction: row;
-        justify-content: start;
-        margin: 0;
+        justify-content: center;
     }
 }
